@@ -1,23 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
+import Apidata from'./Apidata';
+
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="card text-white bg-success">
+        <div className="card-header">
+        WeatherApp
+        </div>
+      </div><br></br>
+        <Apidata/><br></br>
+      <div className="card">
+        <div className="card-footer">
+        Developed by BADAM BHANUTEJA
+        </div>
+      </div>
     </div>
   );
 }
