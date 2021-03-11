@@ -49,7 +49,7 @@ return(
     <div className="card w-50 bg-light">
         <div className="card-body">
             <h5 className="card-title">Temperature</h5>
-            <p className="card-text">{data} C</p>
+            <p className="card-text">{data}&deg;C</p>
         </div>
     </div>
     </div>
