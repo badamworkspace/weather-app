@@ -1,10 +1,14 @@
 import React,{useState} from 'react';
 import axios from "axios";
+import Display from "./Display";
 
 let Apidata=()=>{
     let [city,setCity]=useState('London')
-    let [data,setData]=useState('')
-    let [country,setCountry]=useState('UK')
+    let [inCity,setInCity]=useState('')
+    let [temp,setTemp]=useState('')
+    let [country,setCountry]=useState('')
+    let [condition,setCondition]=useState('')
+    let [flag,setFlag]=useState('false')
     const options = {
         method: 'GET',
         url: 'https://weatherapi-com.p.rapidapi.com/forecast.json',
@@ -14,12 +18,15 @@ let Apidata=()=>{
           'x-rapidapi-host': 'weatherapi-com.p.rapidapi.com'
         }
       };
+     
       function getData(){
       axios.request(options).then(function (response) {
           console.log(response.data);
-          setData(response.data.current.temp_c);
+          setInCity(response.data.location.name)
+          setTemp(response.data.current.temp_c);
           setCountry(response.data.location.country);
-          console.log(country)
+          setCondition(response.data.current.condition.text);
+          setFlag("true")
           })   
       .catch(function (error) {
           console.error(error);
@@ -32,29 +39,15 @@ return(
     <input type="text" placeholder="Enter city" onChange={(e)=>setCity(e.target.value)} />
     <br></br><br></br>
     <button className="btn-dark" onClick={getData}>Sumbit</button><br></br><br></br>
+  {flag==='true'? (
     <div className="card-group">
-    <div className="card w-50 bg-light">
-        <div className="card-body">
-            <h5 className="card-title">City</h5>
-            <p className="card-text">{city}</p>
-        </div>
+        <Display name="City" value={inCity} />
+        <Display name="Country" value={country} />
+        <Display name="Condition" value={condition} />
+        <Display name="Temperature" value={temp} />
     </div>
-    <div className="card w-50 bg-light">
-        <div className="card-body">
-            <h5 className="card-title">Country</h5>
-            <p className="card-text">{country}</p>
-        </div>
-    </div>
-
-    <div className="card w-50 bg-light">
-        <div className="card-body">
-            <h5 className="card-title">Temperature</h5>
-            <p className="card-text">{data}&deg;C</p>
-        </div>
-    </div>
-    </div>
+    ):null  }
     </>
 )
 }
-
 export default Apidata;
